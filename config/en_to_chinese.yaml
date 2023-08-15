@@ -1,0 +1,32 @@
+model: large
+model_dir: '~/.cache/whisper'
+use_peft: true
+input_peft_dir: './model/'
+output_peft_dir: './model/'
+
+dataset_dir: '/home/towardspring/hdd2/dataset/asr/whisper_en'
+
+task: 'translate-chinese'
+
+language: "english"
+language_abbr: "en"
+
+
+train_args:
+    per_device_train_batch_size: 8
+    gradient_accumulation_steps: 1  # increase by 2x for every 2x decrease in batch size
+    learning_rate: 0.001
+    warmup_steps: 50
+    num_train_epochs: 100
+    evaluation_strategy: 'steps'
+    save_steps: 1000
+    save_total_limit: 5
+    fp16: True
+    per_device_eval_batch_size: 8
+    generation_max_length: 128
+    logging_steps: 100
+    max_steps: 6000 # only for testing purposes, remove this from your final run :)
+    remove_unused_columns: False  # required as the PeftModel forward doesn't have the signature of the wrapped model's forward
+    label_names: ["labels"],  # same reason as above
+
+
