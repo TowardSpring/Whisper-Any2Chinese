@@ -96,6 +96,7 @@ def available_models() -> List[str]:
 
 def load_model(
     name: str,
+    config,
     device: Optional[Union[str, torch.device]] = None,
     download_root: str = None,
     in_memory: bool = False,
@@ -145,7 +146,7 @@ def load_model(
     del checkpoint_file
 
     dims = ModelDimensions(**checkpoint["dims"])
-    model = Whisper(dims)
+    model = Whisper(dims,config)
     model.load_state_dict(checkpoint["model_state_dict"])
 
     if alignment_heads is not None:

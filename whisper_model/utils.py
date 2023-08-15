@@ -255,4 +255,6 @@ def get_writer(
 
         return write_all
 
+    
     return writers[output_format](output_dir)
+
