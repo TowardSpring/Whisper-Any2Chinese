@@ -3,10 +3,10 @@
 from huggingface_hub import notebook_login
 from datasets import load_dataset, DatasetDict, Dataset
 from pprint import pprint
-from transformers import WhisperFeatureExtractor
+from .transformers_model import WhisperFeatureExtractor
 import os
-from transformers import WhisperTokenizer
-from transformers import WhisperProcessor
+from .transformers_model import WhisperTokenizer
+from .transformers_model import WhisperProcessor
 
 from datasets import Audio
 import torch
@@ -15,16 +15,16 @@ from dataclasses import dataclass
 from typing import Any, Dict, List, Union
 
 import evaluate
-from .transformers import WhisperForConditionalGeneration,Seq2SeqTrainingArguments
+from .transformers_model import WhisperForConditionalGeneration,Seq2SeqTrainingArguments
 from peft import prepare_model_for_int8_training,LoraConfig, PeftModel, LoraModel, LoraConfig, get_peft_model,PeftModel, PeftConfig
-from transformers import Seq2SeqTrainer, TrainerCallback, TrainingArguments, TrainerState, TrainerControl,WhisperForConditionalGeneration
-from transformers.trainer_utils import PREFIX_CHECKPOINT_DIR
+from .transformers_model import Seq2SeqTrainer, TrainerCallback, TrainingArguments, TrainerState, TrainerControl,WhisperForConditionalGeneration
+from .transformers_model.trainer_utils import PREFIX_CHECKPOINT_DIR
 
 import gc
 import numpy as np
 from tqdm import tqdm
 from torch.utils.data import DataLoader
-from transformers.models.whisper.english_normalizer import BasicTextNormalizer
+from .transformers_model.models.whisper.english_normalizer import BasicTextNormalizer
 
 # 参数配置
 model_name_or_path = "openai/whisper-large-v2"

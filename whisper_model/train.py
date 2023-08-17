@@ -10,13 +10,13 @@ from dataclasses import dataclass
 from typing import Any, Dict, List, Union
 import evaluate
 from peft import prepare_model_for_int8_training,LoraConfig, PeftModel, LoraModel, LoraConfig, get_peft_model,PeftModel, PeftConfig
-from transformers import Seq2SeqTrainer, TrainerCallback, TrainingArguments, TrainerState, TrainerControl,WhisperForConditionalGeneration, Seq2SeqTrainer
-from transformers.trainer_utils import PREFIX_CHECKPOINT_DIR
+from transformers_model import Seq2SeqTrainer, TrainerCallback, TrainingArguments, TrainerState, TrainerControl,WhisperForConditionalGeneration, Seq2SeqTrainer
+from transformers_model.trainer_utils import PREFIX_CHECKPOINT_DIR
 import gc
 import numpy as np
 from tqdm import tqdm
 from torch.utils.data import DataLoader
-from transformers.models.whisper.english_normalizer import BasicTextNormalizer
+from transformers_model.models.whisper.english_normalizer import BasicTextNormalizer
 from tokenizer import Tokenizer
 import argparse
 import yaml
