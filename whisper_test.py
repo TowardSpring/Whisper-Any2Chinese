@@ -3,10 +3,10 @@
 from huggingface_hub import notebook_login
 from datasets import load_dataset, DatasetDict, Dataset
 from pprint import pprint
-from transformers import WhisperFeatureExtractor
+from .transformers import WhisperFeatureExtractor
 import os
-from transformers import WhisperTokenizer
-from transformers import WhisperProcessor
+from .transformers import WhisperTokenizer
+from .transformers import WhisperProcessor
 
 from datasets import Audio
 import torch
@@ -15,10 +15,10 @@ from dataclasses import dataclass
 from typing import Any, Dict, List, Union
 import pandas as pd
 import evaluate
-from transformers import WhisperForConditionalGeneration,Seq2SeqTrainingArguments
+from .transformers import WhisperForConditionalGeneration,Seq2SeqTrainingArguments
 from peft import prepare_model_for_int8_training,LoraConfig, PeftModel, LoraModel, LoraConfig, get_peft_model,PeftModel, PeftConfig
-from transformers import Seq2SeqTrainer, TrainerCallback, TrainingArguments, TrainerState, TrainerControl,WhisperForConditionalGeneration, Seq2SeqTrainer
-from transformers.trainer_utils import PREFIX_CHECKPOINT_DIR
+from .transformers import Seq2SeqTrainer, TrainerCallback, TrainingArguments, TrainerState, TrainerControl,WhisperForConditionalGeneration, Seq2SeqTrainer
+from .transformers.trainer_utils import PREFIX_CHECKPOINT_DIR
 import librosa
 import gc
 import numpy as np

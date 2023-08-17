@@ -3,10 +3,10 @@
 from huggingface_hub import notebook_login
 from datasets import load_dataset, DatasetDict, Dataset
 from pprint import pprint
-from .transformers import WhisperFeatureExtractor
+from transformers import WhisperFeatureExtractor
 import os
-from .transformers import WhisperTokenizer
-from .transformers import WhisperProcessor
+from transformers import WhisperTokenizer
+from transformers import WhisperProcessor
 
 from datasets import Audio
 import torch
@@ -17,16 +17,14 @@ from typing import Any, Dict, List, Union
 import evaluate
 from .transformers import WhisperForConditionalGeneration,Seq2SeqTrainingArguments
 from peft import prepare_model_for_int8_training,LoraConfig, PeftModel, LoraModel, LoraConfig, get_peft_model,PeftModel, PeftConfig
-from .transformers import Seq2SeqTrainer, TrainerCallback, TrainingArguments, TrainerState, TrainerControl,WhisperForConditionalGeneration, Seq2SeqTrainer
-from .transformers.trainer_utils import PREFIX_CHECKPOINT_DIR
+from transformers import Seq2SeqTrainer, TrainerCallback, TrainingArguments, TrainerState, TrainerControl,WhisperForConditionalGeneration
+from transformers.trainer_utils import PREFIX_CHECKPOINT_DIR
 
 import gc
 import numpy as np
 from tqdm import tqdm
 from torch.utils.data import DataLoader
-from .transformers.models.whisper.english_normalizer import BasicTextNormalizer
-
-from whisper_model.tokenizer import Tokenizer
+from transformers.models.whisper.english_normalizer import BasicTextNormalizer
 
 # 参数配置
 model_name_or_path = "openai/whisper-large-v2"
@@ -185,7 +183,8 @@ model.config.use_cache = False  # silence the warnings. Please re-enable for inf
 trainer.train()
 
 
-trainer.save_model("model/whisper-large-v2-uygur-peft")
+trainer.save_model("reach-vb/whisper-large-v2-uygur-1000steps-100epochs")
+
 
 
 
