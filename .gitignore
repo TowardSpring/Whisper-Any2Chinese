@@ -393,7 +393,7 @@ FodyWeavers.xsd
 *.msix
 *.msm
 *.msp
-
+whisper_model
 # JetBrains Rider
 *.sln.iml
 data/
