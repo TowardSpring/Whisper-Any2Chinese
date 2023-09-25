@@ -1,1 +1,0 @@
-# whisper app run(MAC, Windows, Linux)
