@@ -197,7 +197,7 @@ LANGUAGES = {
     "ba": "bashkir",
     "jw": "javanese",
     "su": "sundanese",
-    "ug": "uyghur,"
+    "ug": "uyghur",
 }
 
 # language code lookup by name, with a few language aliases

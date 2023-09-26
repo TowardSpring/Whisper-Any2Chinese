@@ -363,7 +363,7 @@ ASALocalRun/
 
 # Visual Studio History (VSHistory) files
 .vshistory/
-
+trained_model/
 # BeatPulse healthcheck temp database
 healthchecksdb
 .vscode/

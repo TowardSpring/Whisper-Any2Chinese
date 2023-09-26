@@ -21,11 +21,9 @@ from transformers import Seq2SeqTrainer, TrainerCallback, TrainingArguments, Tra
 from transformers.trainer_utils import PREFIX_CHECKPOINT_DIR
 
 
-import gc
-import numpy as np
-from tqdm import tqdm
-from torch.utils.data import DataLoader
-from transformers.models.whisper.english_normalizer import BasicTextNormalizer
+
+#设定CUDA_LAUNCH_BLOCKING=1
+# os.environ['CUDA_LAUNCH_BLOCKING'] = '1'
 
 # load dataset
 common_voice = DatasetDict()
@@ -109,9 +107,8 @@ class DataCollatorSpeechSeq2SeqWithPadding:
         # split inputs and labels since they have to be of different lengths and need different padding methods
         # first treat the audio inputs by simply returning torch tensors
         input_features = [{"input_features": feature["input_features"]} for feature in features]
-        print(f'input_features:{input_features}, size of input_features[0]:{len(input_features[0])}')
         batch = self.processor.feature_extractor.pad(input_features, return_tensors="pt")
-
+        print(f'------> batch device = {batch.device}')
         # get the tokenized label sequences
         label_features = [{"input_ids": feature["labels"]} for feature in features]
         # pad the labels to max length
@@ -126,7 +123,7 @@ class DataCollatorSpeechSeq2SeqWithPadding:
             labels = labels[:, 1:]
 
         batch["labels"] = labels
-
+        
         return batch
 
 data_collator = DataCollatorSpeechSeq2SeqWithPadding(processor=processor)
@@ -147,8 +144,10 @@ model.model.encoder.conv1.register_forward_hook(make_inputs_require_grad)
 config = LoraConfig(r=32, lora_alpha=64, target_modules=["q_proj", "v_proj"], lora_dropout=0.05, bias="none")
 
 model = get_peft_model(model, config)
-model.print_trainable_parameters()
 
+model.print_trainable_parameters()
+# 迁移model到CPU训练
+# model.to('cpu')
 
 training_args = Seq2SeqTrainingArguments(
     output_dir=OUTPUT_DIR,  # change to a repo name of your choice
@@ -199,7 +198,13 @@ trainer = Seq2SeqTrainer(
     callbacks=[SavePeftModelCallback],
 )
 
-# model.config.use_cache = False  # silence the warnings. Please re-enable for inference!
+model.config.use_cache = False  # silence the warnings. Please re-enable for inference!
+
+
+
+
+
+
 
 trainer.train()
 
