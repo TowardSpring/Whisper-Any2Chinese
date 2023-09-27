@@ -1,10 +1,12 @@
 # Any-to-Chinese
 ## Introduction
-Transcribe multilingual speech into Chinese text
-The program aims to provide a tool for transcribing multilingual speech into Chinese text. The program is based on the <strong>whisper model</strong> which has been secondary trained with plenty of Chinese speech ASR and minority ASR dataset.
+Whisper显然是一个非常优秀的语言识别模型，其支持多种语言的语音转录，也支持多种语言转录之后直接输出对应的英文。当前，网上已经有非常的使用教程，支持对已含语种的进一步微调。同时，也有对Whisper的修改，以期能进一步加速识别的过程。
 
-The structure of program is based on NiceGUI, Pytorch, etc.
+但是，Whisper模型本身的能力并不应限制于当前的功能，它从原理上也应该支持添加新的语种的语音识别，支持将所有的语种直接转录为中文。本项目就是基于Whisper的原理，对其进行了一些修改，使其能够支持任意语种的语音识别，同时也支持将其转录为中文。
 
-The program can be used for transcribing Chinese, English, Japanese, Korean, Russian, French, Spanish, German, Arabic, Thai, Vietnamese, Indonesian, Malay, Portuguese, Italian, Dutch, Greek, Turkish, Hindi, Bengali, Tamil, Urdu, Persian, Hebrew, Swahili, Amharic, Zulu, Afrikaans, Mongolian, Nepali, Lao, Burmese, Khmer, Filipino, Sinhala, Kazakh, Kyrgyz, Tajik, Uzbek, Pashto, Somali, Hausa, Igbo, Yoruba, Malagasy, Maori, Swahili, Zulu, Afrikaans, Mongolian, Nepali, Lao, Burmese, Khmer, Filipino, Sinhala, Kazakh, Kyrgyz, Tajik, Uzbek, Pashto, Somali, Hausa, Igbo, Yoruba, Malagasy, Maori, etc. into their own language text.
+为了支持市场更多的个人服务器能够实现这些微调，本项目采用PEFT方法减少对训练资源的需求。同时，本项目也提供了一些脚本，以便于用户能够更加方便的使用本项目。
 
-And, the peogram can also be used for transcribing and translating English, Uyghur, Tibetan, Mongolian, Kazakh, Kyrgyz, Tajik, Uzbek, Pashto, Somali, Hausa, Igbo, Yoruba, Malagasy, Maori, etc. into Chinese text.
+# 本项目开发进度
+    [*] 完成对新语种、新功能的微调训练教程的编写（any2chinese_train_*.ipynb）。
+    [ ] 完成对英语转录中文的模型微调训练（支持训练，验证与推理）
+    [ ] 完成Web界面的搭建，方便本项目的直接应用。
