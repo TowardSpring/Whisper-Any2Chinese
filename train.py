@@ -10,7 +10,7 @@ from transformers import WhisperProcessor
 
 from datasets import Audio
 import torch
-from config.whisper_config import MODEL_CONFIG_FILE_ROOT_PATH, DATASET_NAME_OR_PATH, LANGUAGE, LANGUAGE_ABBR, MODEL_NAME_OR_PATH, TASK, NEW_TOKENS, OUTPUT_DIR
+from config.whisper_config import MODEL_CONFIG_FILE_ROOT_PATH, DATASET_NAME_OR_PATH, LANGUAGE, LANGUAGE_ABBR, MODEL_NAME_OR_PATH, TASK, NEW_TOKENS, OUTPUT_DIR, CACHE_DIR
 from dataclasses import dataclass
 from typing import Any, Dict, List, Union
 
@@ -28,9 +28,9 @@ from transformers.trainer_utils import PREFIX_CHECKPOINT_DIR
 # load dataset
 common_voice = DatasetDict()
 
-common_voice["train"] = load_dataset(DATASET_NAME_OR_PATH, split="train")
-common_voice["test"] = load_dataset(DATASET_NAME_OR_PATH, split="test")
-common_voice["validation"] = load_dataset(DATASET_NAME_OR_PATH, split="validation")
+common_voice["train"] = load_dataset(DATASET_NAME_OR_PATH, split="train", cache_dir=CACHE_DIR)
+common_voice["test"] = load_dataset(DATASET_NAME_OR_PATH, split="test", cache_dir=CACHE_DIR)
+common_voice["validation"] = load_dataset(DATASET_NAME_OR_PATH, split="validation", cache_dir=CACHE_DIR)
 
 print(common_voice)
 
@@ -63,7 +63,7 @@ json_str = json.dumps(special_tokens_map,ensure_ascii=False)
 with open(special_tokens_file, 'w') as f:
     f.write(json_str)
 
-input_str = common_voice["train"][0]["chinese"]
+input_str = common_voice["train"][6]["chinese"]
 labels = tokenizer(input_str).input_ids
 decoded_with_special = tokenizer.decode(labels, skip_special_tokens=False)
 decoded_str = tokenizer.decode(labels, skip_special_tokens=True)
@@ -75,10 +75,10 @@ print(f"Decoded without special: {decoded_str}")
 print(f"Are equal: {input_str == decoded_str}")
 
 # 数据处理
-pprint(common_voice["train"][1])
+pprint(common_voice["train"][6])
 common_voice = common_voice.cast_column("audio", Audio(sampling_rate=16000))
 
-pprint(common_voice["train"][1])
+pprint(common_voice["train"][6])
 
 
 def prepare_dataset(batch):
@@ -161,7 +161,6 @@ training_args = Seq2SeqTrainingArguments(
     save_total_limit = 6,
     fp16=True,
     per_device_eval_batch_size=8,
-    generation_max_length=128,
     logging_steps=100,
     # max_steps=6000, # only for testing purposes, remove this from your final run :)s
     remove_unused_columns=False,  # required as the PeftModel forward doesn't have the signature of the wrapped model's forward
@@ -209,6 +208,7 @@ model.config.use_cache = False  # silence the warnings. Please re-enable for inf
 trainer.train()
 
 trainer.save_model("trained_model/whisper-large-v2-en2chinese")
+
 
 
 

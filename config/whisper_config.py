@@ -2,9 +2,13 @@
 # You should change the following config parameters according to your own environment
 MODEL_CONFIG_FILE_ROOT_PATH = '/home/towardspring/.cache/huggingface/hub/models--openai--whisper-large-v2/snapshots/94ee83d319e97b04ac0d46235a8097e4865968b3'
 
-DATASET_NAME_OR_PATH = "./data/en_mini"
+
+DATASET_NAME_OR_PATH = "/home/towardspring/hdd2/dataset/asr/en_train"
+CACHE_DIR = '/home/towardspring/hdd2/dataset/huggingface_cache/en_train'
+
+
 LANGUAGE = "english"
-LANGUAGE_ABBR = "ug" 
+LANGUAGE_ABBR = "en" 
 
 MODEL_NAME_OR_PATH = "/home/towardspring/.cache/huggingface/hub/models--openai--whisper-large-v2/snapshots/94ee83d319e97b04ac0d46235a8097e4865968b3"
 TASK = "translate-chinese"
