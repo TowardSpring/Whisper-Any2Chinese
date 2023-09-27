@@ -108,7 +108,7 @@ class DataCollatorSpeechSeq2SeqWithPadding:
         # first treat the audio inputs by simply returning torch tensors
         input_features = [{"input_features": feature["input_features"]} for feature in features]
         batch = self.processor.feature_extractor.pad(input_features, return_tensors="pt")
-        print(f'------> batch device = {batch.device}')
+        # print(f'------> batch device = {batch.device}')
         # get the tokenized label sequences
         label_features = [{"input_ids": feature["labels"]} for feature in features]
         # pad the labels to max length
@@ -151,7 +151,7 @@ model.print_trainable_parameters()
 
 training_args = Seq2SeqTrainingArguments(
     output_dir=OUTPUT_DIR,  # change to a repo name of your choice
-    per_device_train_batch_size=16,
+    per_device_train_batch_size=8,
     gradient_accumulation_steps=1,  # increase by 2x for every 2x decrease in batch size
     learning_rate=1e-3,
     warmup_steps=50,
@@ -208,4 +208,9 @@ model.config.use_cache = False  # silence the warnings. Please re-enable for inf
 
 trainer.train()
 
-trainer.save_model("trained_model/whisper-small-en2chinese")
+trainer.save_model("trained_model/whisper-large-v2-en2chinese")
+
+
+
+
+# nohup python train.py > ./log/train_whisper_large_v2_en2chinese.log 2>&1 &

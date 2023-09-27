@@ -369,10 +369,10 @@ healthchecksdb
 .vscode/
 # Backup folder for Package Reference Convert tool in Visual Studio 2017
 MigrationBackup/
-
+.DS_Store
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
-
+log/
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
 
