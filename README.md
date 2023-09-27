@@ -1,4 +1,4 @@
-# Any-to-Chinese
+# Whisper-Any2Chinese
 ## Introduction
 Whisper显然是一个非常优秀的语言识别模型，其支持多种语言的语音转录，也支持多种语言转录之后直接输出对应的英文。当前，网上已经有非常的使用教程，支持对已含语种的进一步微调。同时，也有对Whisper的修改，以期能进一步加速识别的过程。
 
