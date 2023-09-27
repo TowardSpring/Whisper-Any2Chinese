@@ -11,8 +11,11 @@ LANGUAGE = "english"
 LANGUAGE_ABBR = "en" 
 
 MODEL_NAME_OR_PATH = "/home/towardspring/.cache/huggingface/hub/models--openai--whisper-large-v2/snapshots/94ee83d319e97b04ac0d46235a8097e4865968b3"
+
+
 TASK = "translate-chinese"
 NEW_TOKENS = ['<|translate-chinese|>','<|en|>']
+
 
 OUTPUT_DIR = './trained_model/whisper_large_v2'
 
